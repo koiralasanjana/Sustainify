@@ -1,0 +1,86 @@
+/* General header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #f7fdf5; /* Light eco-friendly green */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styling */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #028a0f; /* Green text */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #028a0f;
+}
+
+/* Action buttons (Login and Sign Up) */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.login-btn,
+.signup-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn {
+    background-color: #ffffff;
+    color: #028a0f;
+    border: 2px solid #028a0f;
+}
+
+.login-btn:hover {
+    background-color: #f0f8f0;
+}
+
+.signup-btn {
+    background-color: #028a0f;
+    color: #ffffff;
+}
+
+.signup-btn:hover {
+    background-color: #026b0c;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide navigation links for mobile */
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}
