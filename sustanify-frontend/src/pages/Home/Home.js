@@ -21,22 +21,22 @@ const Home = () => {
                 <h2>Our Features</h2>
                 <div className="features-grid">
                     <div className="feature-card">
-                        <img src="/assets/feature-icon1.png" alt="Feature 1" />
+                        <img src="/assets/report-issue.png" alt="Feature 1" />
                         <h3>Report Issues</h3>
                         <p>Easily report environmental concerns in your community.</p>
                     </div>
                     <div className="feature-card">
-                        <img src="/assets/feature-icon2.png" alt="Feature 2" />
+                        <img src="/assets/track-progress.png" alt="Feature 2" />
                         <h3>Track Progress</h3>
                         <p>Monitor the status and updates of reported issues.</p>
                     </div>
                     <div className="feature-card">
-                        <img src="/assets/feature-icon3.png" alt="Feature 3" />
+                        <img src="/assets/earn-rewards.png" alt="Feature 3" />
                         <h3>Earn Rewards</h3>
                         <p>Get recognized and rewarded for your contributions.</p>
                     </div>
                     <div className="feature-card">
-                        <img src="/assets/feature-icon4.png" alt="Feature 4" />
+                        <img src="/assets/interactive-map.png" alt="Feature 4" />
                         <h3>Interactive Map</h3>
                         <p>Explore reported issues in your area with an intuitive map.</p>
                     </div>
