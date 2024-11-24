@@ -9,7 +9,7 @@ const Home = () => {
                 <div className="hero-content">
                     <h1>Make an Impact in Your Community Today!</h1>
                     <p>Report environmental issues, track progress, and contribute to sustainability efforts.</p>
-                    <button className="cta-button">Get Started</button>
+                    <button className="cta-button">Report an Issue</button>
                 </div>
                 <div className="hero-map">
                     <img src="/assets/map-placeholder.png" alt="Map" />
