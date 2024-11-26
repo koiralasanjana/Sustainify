@@ -33,20 +33,33 @@
     margin-bottom: 20px;
 }
 
+/* Styling the Call-To-Action Button */
 .cta-button {
+    display: inline-block;
     background-color: #028a0f;
     color: white;
+    font-size: 14px; /* Small font size */
+    font-weight: 600; /* Semi-bold for readability */
+    padding: 8px 16px; /* Reduced padding to shorten length */
     border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 6px; /* Slightly rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: all 0.3s ease;
+    margin-top: 15px; /* Spacing from the text above */
+    width: auto; /* Ensure the button only wraps content */
+    min-width: 200px; /* Optional: Set a minimum width to maintain consistency */
 }
 
+/* Hover Effect */
 .cta-button:hover {
-    background-color: #026b0c;
+    background-color: #026b0c; /* Slightly darker green for hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
+
 
 .hero-map {
     flex: 1;
