@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../Modal/Modal';  // Import Modal
+import Login from '../../pages/Login/Login'; // Import LoginModal
+import Register from '../../pages/Register/register'; // Import RegisterModal
 import './Header.css';
 
 const Header = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [isSignup, setIsSignup] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
+    const [isNavOpen, setIsNavOpen] = useState(false); // State to manage hamburger menu
 
-    const openModal = (signup) => {
-        setIsSignup(signup);
-        setShowModal(true);
+    const toggleNav = () => {
+        setIsNavOpen(!isNavOpen);
     };
 
     return (
@@ -18,20 +19,32 @@ const Header = () => {
                 <div className="logo">
                     <Link to="/">Sustainify</Link>
                 </div>
-                <nav className="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/features">Features</Link>
-                    <Link to="/services">Services</Link>
-                    <Link to="/contact">Contact</Link>
+                <nav className={`nav-links ${isNavOpen ? 'active' : ''}`}>
+                    <Link to="/" onClick={toggleNav}>Home</Link>
+                    <Link to="/features" onClick={toggleNav}>Features</Link>
+                    <Link to="/services" onClick={toggleNav}>Services</Link>
+                    <Link to="/contact" onClick={toggleNav}>Contact</Link>
                 </nav>
                 <div className="action-buttons">
-                    <button className="login-btn" onClick={() => openModal(false)}>Login</button>
-                    <button className="signup-btn" onClick={() => openModal(true)}>Sign Up</button>
+                    <button className="login-btn" onClick={() => setShowLogin(true)}>Login</button>
+                    <button className="signup-btn" onClick={() => setShowRegister(true)}> Sign Up</button>
+                    <button className="hamburger" onClick={toggleNav}>☰</button>
                 </div>
             </header>
 
-            {/* Modal Component */}
-            <Modal show={showModal} onClose={() => setShowModal(false)} isSignup={isSignup} />
+            {/* Render Modals */}
+            {showLogin && (
+                <Login
+                    show={showLogin}
+                    onClose={() => setShowLogin(false)}
+                />
+            )}
+            {showRegister && (
+                <Register
+                    show={showRegister}
+                    onClose={() => setShowRegister(false)}
+                />
+            )}
         </>
     );
 };
