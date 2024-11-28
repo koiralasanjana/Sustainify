@@ -21,7 +21,7 @@ const Header = () => {
                 </div>
                 <nav className={`nav-links ${isNavOpen ? 'active' : ''}`}>
                     <Link to="/" onClick={toggleNav}>Home</Link>
-                    <Link to="/features" onClick={toggleNav}>Features</Link>
+                    <Link to="#feature" onClick={toggleNav}>Features</Link>
                     <Link to="/services" onClick={toggleNav}>Services</Link>
                     <Link to="/contact" onClick={toggleNav}>Contact</Link>
                 </nav>
