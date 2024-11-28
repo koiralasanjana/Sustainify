@@ -16,7 +16,7 @@ const Register = ({ show, onClose }) => {
                         <input type="text" placeholder="Name" required />
                         <input type="email" placeholder="Email" required />
                         <input type="password" placeholder="Password" required />
-                        <button type="submit" className='signup-btn'>Sign Up</button>
+                        <button type="submit" className='action-btn'>Sign Up</button>
                     </form>
                     <button
                         className="guest-button"

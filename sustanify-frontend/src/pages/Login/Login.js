@@ -16,7 +16,7 @@ const Login = ({ show, onClose }) => {
                     <form>
                         <input type="email" placeholder="Email" required />
                         <input type="password" placeholder="Password" required />
-                        <button type="submit">Login</button>
+                        <button type="submit" className='action-btn'>Login</button>
                     </form>
                     <button
                         className="guest-button"
