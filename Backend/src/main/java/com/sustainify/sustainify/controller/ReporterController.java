@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/api")
 public class ReporterController {
 
     @Autowired
     private ReporterService reporterService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<String> registerReporter(@RequestBody Reporter reporter){
         try{
             reporterService.registerReporter(reporter);
