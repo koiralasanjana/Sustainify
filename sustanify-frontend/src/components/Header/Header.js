@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 import Login from '../../pages/Login/Login'; // Import LoginModal
 import Register from '../../pages/Register/register'; // Import RegisterModal
 import './Header.css';
@@ -10,9 +10,31 @@ const Header = () => {
     const [showRegister, setShowRegister] = useState(false);
     const [isNavOpen, setIsNavOpen] = useState(false); // State to manage hamburger menu
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
     };
+
+    const handleScrollToFeatures = (e) => {
+        e.preventDefault();
+        if(location.pathname === '/'){
+            scroller.scrollTo('features',{
+                smooth: true,
+                duration: 500,
+            });
+        }else{
+            navigate('/');
+            setTimeout(()=>{
+                scroller.scrollTo('features',{
+                    smooth: true,
+                    duration: 500,
+                });
+            }, 100)
+        }
+        toggleNav();
+    }
 
     return (
         <>
@@ -22,10 +44,10 @@ const Header = () => {
                 </div>
                 <nav className={`nav-links ${isNavOpen ? 'active' : ''}`}>
                     <Link to="/" onClick={toggleNav}>Home</Link>
-                    <ScrollLink to="features" smooth={true}duration={500}onClick={toggleNav}>
+                    {/* <ScrollLink to="features" smooth={true}duration={500}onClick={toggleNav}>
                         Features
-                    </ScrollLink>
-                    {/* <Link to="#feature" onClick={toggleNav}>Features</Link> */}
+                    </ScrollLink> */}
+                    <Link to="/" onClick={handleScrollToFeatures}>Features</Link>
                     <Link to="/services" onClick={toggleNav}>Services</Link>
                     <Link to="/contact" onClick={toggleNav}>Contact</Link>
                 </nav>
