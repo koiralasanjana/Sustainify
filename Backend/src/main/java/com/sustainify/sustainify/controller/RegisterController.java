@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class ReporterController {
+public class RegisterController {
 
     @Autowired
     private ReporterService reporterService;

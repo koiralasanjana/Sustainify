@@ -9,6 +9,7 @@ public class ReporterService {
 
     @Autowired
     private ReporterRepository reporterRepository;
+    
 
     public Reporter registerReporter(Reporter reporter){
         return reporterRepository.save(reporter);

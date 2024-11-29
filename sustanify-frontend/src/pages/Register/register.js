@@ -24,6 +24,12 @@ const Register = ({ show, onClose }) => {
 
         setErrorMessage("");
 
+        console.log("Sending data:", {
+            name: name,
+            email: email,
+            password: password,
+        });
+
         try{
             const response = await fetch('http://localhost:8081/api/register',{
                 method: 'POST',
@@ -38,6 +44,9 @@ const Register = ({ show, onClose }) => {
             });
 
             const data = await response.json();
+
+            console.log('Response:', data);
+
             if (response.ok){
                 alert('User registered successfully!');
                 navigate('/');
