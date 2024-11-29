@@ -17,7 +17,7 @@ const Home = () => {
             </section>
 
             {/* Features Section */}
-            <section className="features-section" id="feature">
+            <section className="features-section" id="features">
                 <h2>Our Features</h2>
                 <div className="features-grid">
                     <div className="feature-card">
