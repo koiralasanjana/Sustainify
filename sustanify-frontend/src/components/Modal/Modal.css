@@ -60,11 +60,6 @@
     transform: scale(1.2); /* Subtle zoom effect */
     transition: color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Smooth hover effect */
 }
-/* Hover Effect for All Buttons */
-button:hover, .guest-button:hover {
-    background-color: #026b0c; /* Darker green on hover */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for hover effect */
-}
 
 /* Continue as Guest Specific Styling */
 .guest-button {
@@ -88,7 +83,7 @@ input {
 }
 
 /* General Button Styling for Modal */
-button, .guest-button {
+.guest-button {
     display: block; /* Ensure buttons take up full width */
     width: 100%; /* Full width of the modal */
     padding: 10px 20px; /* Consistent padding for all buttons */
@@ -100,12 +95,19 @@ button, .guest-button {
     cursor: pointer; /* Pointer on hover */
     transition: all 0.3s ease; /* Smooth hover effects */
 }
-/* Login and Sign-Up Button */
-button {
-    background-color: #028a0f; /* Default green background */
-    color: white; /* White text for contrast */
+
+.action-btn{
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    background-color: #028a0f;
+    color: #ffffff;
 }
-button:hover {
-    background-color: #026b0c; /* Darker green on hover */
+
+.action-btn:hover{
+    background-color: #026b0c;
 }
