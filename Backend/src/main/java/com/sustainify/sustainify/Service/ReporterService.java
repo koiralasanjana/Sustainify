@@ -10,8 +10,11 @@ public class ReporterService {
     @Autowired
     private ReporterRepository reporterRepository;
     
-
-    public Reporter registerReporter(Reporter reporter){
+    public Reporter registerReporter(Reporter reporter) {
+        if (reporter.getName() == null || reporter.getEmail() == null || reporter.getPassword() == null) {
+            throw new IllegalArgumentException("Name, email, and password must not be null.");
+        }
         return reporterRepository.save(reporter);
     }
 }
+

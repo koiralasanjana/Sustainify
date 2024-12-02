@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../components/Modal/Modal.css';
-import '../Register/register.css'
+import '../Register/register.css';
+import { register } from '../../services/reporter-service';
 import { useNavigate } from 'react-router-dom';
 
 const Register = ({ show, onClose }) => {
@@ -11,54 +12,64 @@ const Register = ({ show, onClose }) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     if (!show) return null; // Render nothing if `show` is false
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(password !== confirmPassword){
+        setLoading(true);
+    
+        // Passwords do not match check
+        if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match!");
             setConfirmPassword("");
+            setLoading(false);
             return;
         }
-
-        setErrorMessage("");
-
-        console.log("Sending data:", {
-            name: name,
-            email: email,
-            password: password,
-        });
-
-        try{
-            const response = await fetch('http://localhost:8081/api/register',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    password: password,
-                }),
-            });
-
-            const data = await response.json();
-
-            console.log('Response:', data);
-
-            if (response.ok){
+    
+        // Ensure all fields are filled
+        if (!name || !email || !password) {
+            setErrorMessage("All fields are required.");
+            setLoading(false);
+            return;
+        }
+    
+        setErrorMessage(""); // Clear previous error messages
+    
+        const data = { name, email, password };
+    
+        console.log("Sending data:", data);
+    
+        try {
+            const resp = await register(data);
+            setLoading(false);
+    
+            console.log('Response from server:', resp);
+    
+            // Check if response has a success message or data
+            if (resp && resp.status === 200) {
                 alert('User registered successfully!');
                 navigate('/');
+                // Reset form fields after successful registration
+                setName('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
             } else {
-                setErrorMessage(data.error || 'An error occurred.');
+                // Handle errors if the response is not successful
+                setErrorMessage(resp?.data?.error || 'An error occurred.');
             }
-
-        } catch (error){
-            setErrorMessage('Unable to connect to the server.');
+    
+        } catch (error) {
+            setLoading(false);
+            console.error('Error occurred:', error);
+    
+            // Check for the error response
+            setErrorMessage(error?.response?.data?.error || 'Unable to register user.');
         }
-    }
-
+    };    
+    
     return (
         <>
             <div className="modal-overlay">
@@ -75,7 +86,9 @@ const Register = ({ show, onClose }) => {
                         {errorMessage && (
                             <p className='error-message'>{errorMessage}</p>
                         )}
-                        <button type="submit" className='action-btn'>Sign Up</button>
+                        <button type="submit" className="action-btn" disabled={loading}>
+                            {loading ? 'Registering...' : 'Sign Up'}
+                        </button>
                     </form>
                     <button
                         className="guest-button"
