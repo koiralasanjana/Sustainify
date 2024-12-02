@@ -4,6 +4,8 @@ import com.sustainify.sustainify.Repository.ReporterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReporterService {
 
@@ -16,5 +18,8 @@ public class ReporterService {
         }
         return reporterRepository.save(reporter);
     }
+    // Fetch all reporters
+    public List<Reporter> getAllReporters() {
+        return reporterRepository.findAll();
+    }
 }
-
