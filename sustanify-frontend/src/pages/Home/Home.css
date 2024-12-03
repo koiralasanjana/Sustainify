@@ -120,3 +120,208 @@
     font-size: 12px;
     color: #666;
 }
+/* OrganizationHome Component */
+.organization-home {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align at the top */
+    min-height: 80vh;
+    background-color: #f7fdf5;
+    padding-top: 20px; /* Adds margin on top */
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 80%;
+    max-width: 900px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.info-section {
+    flex: 1;
+    background-color: #e7ffe7;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-section h2 {
+    font-size: 22px;
+    color: #028a0f;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    display: inline-block;
+    background-color: #028a0f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #026b0c;
+}
+
+.form-section {
+    flex: 2;
+    padding: 20px;
+}
+/* Steps container */
+.steps-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure full width for spacing */
+}
+
+/* Step Indicator */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Ensures full width */
+}
+
+/* Step circle */
+.step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 10px; /* Adjust spacing between steps */
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Step completed */
+.step.completed {
+    background-color: #028a0f;
+}
+
+/* Dots between steps */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 10px; /* Adjust spacing between dots */
+}
+
+/* Dot completed state */
+.dot.completed {
+    background-color: #028a0f;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form h3 {
+    font-size: 20px;
+    color: #028a0f;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+form h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #028a0f;
+    outline: none;
+}
+
+form button {
+    background-color: #028a0f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background-color: #026b0c;
+}
+
+form .optional {
+    color: #666;
+    font-size: 12px;
+}
+/* Form buttons container */
+.form-buttons {
+    display: flex; /* Aligns the buttons horizontally */
+    justify-content: space-between; /* Places equal space between buttons */
+    gap: 10px; /* Adds spacing between buttons */
+    margin-top: 20px; /* Adds space above the buttons */
+}
+
+/* Individual button styles */
+.form-buttons button {
+    flex: none; /* Ensures buttons don't stretch unnecessarily */
+    padding: 10px 20px; /* Proper button size */
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #028a0f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Button hover effect */
+.form-buttons button:hover {
+    background-color: #026b0c;
+    transform: translateY(-2px); /* Adds a lift effect */
+}
