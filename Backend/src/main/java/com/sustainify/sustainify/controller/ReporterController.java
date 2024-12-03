@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")  // Replace with your frontend URL
 @RestController
 @RequestMapping("/api")
-public class RegisterController {
+public class ReporterController {
     @Autowired
     private ReporterService reporterService;
 
