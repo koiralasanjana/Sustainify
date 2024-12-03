@@ -29,6 +29,12 @@ const Register = ({ show, onClose }) => {
             return;
         }
 
+        if(password.length<8){
+            setErrorMessage("Password should be at least 8 characters long");
+            setLoading(false);
+            return;
+        }
+
         // Ensure all fields are filled
         if (!name || !email || !password) {
             setErrorMessage("All fields are required.");

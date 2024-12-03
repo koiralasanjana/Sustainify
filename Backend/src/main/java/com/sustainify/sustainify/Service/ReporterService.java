@@ -17,6 +17,18 @@ public class ReporterService {
     @Autowired
     private PasswordEncoder passwordEncoder;  // Autowire PasswordEncoder
 
+    public boolean authenticateReporter(String email, String password) {
+        // Find the reporter by email
+        Reporter reporter = reporterRepository.existsByEmail(email);
+        
+        if (reporter == null) {
+            return false;  // Reporter not found
+        }
+        
+        // Check if the password matches
+        return passwordEncoder.matches(password, reporter.getPassword());
+    }
+
     public Reporter registerReporter(Reporter reporter) {
         // Check if required fields are not null
         if (reporter.getName() == null || reporter.getEmail() == null || reporter.getPassword() == null) {
