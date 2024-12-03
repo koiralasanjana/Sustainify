@@ -122,12 +122,12 @@
 }
 /* OrganizationHome Component */
 .organization-home {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align at the top */
-    min-height: 80vh;
-    background-color: #f7fdf5;
-    padding-top: 20px; /* Adds margin on top */
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    min-height: 100vh; /* Ensures it takes full viewport height */
+    background-color: #f7fdf5; /* Retains the existing background */
+    padding: 20px; /* Adds a bit of spacing */
 }
 
 .card-container {
@@ -300,10 +300,20 @@ form .optional {
 }
 /* Form buttons container */
 .form-buttons {
-    display: flex; /* Aligns the buttons horizontally */
-    justify-content: space-between; /* Places equal space between buttons */
-    gap: 10px; /* Adds spacing between buttons */
-    margin-top: 20px; /* Adds space above the buttons */
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Full-Width Styling for Step 1 (Sign-Up) */
+.form-buttons.full-width button {
+    width: 100%; /* Full width */
+    flex: 1; /* Ensures button takes the full container width */
+}
+
+/* Half-Width Styling for Step 2 */
+.form-buttons.half-width button {
+    flex: 1; /* Each button takes half the available space */
 }
 
 /* Individual button styles */
@@ -324,4 +334,9 @@ form .optional {
 .form-buttons button:hover {
     background-color: #026b0c;
     transform: translateY(-2px); /* Adds a lift effect */
+}
+.helper-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
 }
