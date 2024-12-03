@@ -4,7 +4,6 @@ import com.sustainify.sustainify.Model.Organization;
 import com.sustainify.sustainify.Service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
