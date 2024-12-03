@@ -127,7 +127,10 @@ const Register = ({ show, onClose }) => {
                     </form>
                     <button
                         className="guest-button"
-                        onClick={() => navigate('/guest')}
+                        onClick={() => {
+                            navigate('/guest'); // Navigate to guest route
+                            onClose(); // Call onClose to close the modal
+                        }}
                     >
                         Continue as Guest
                     </button>
