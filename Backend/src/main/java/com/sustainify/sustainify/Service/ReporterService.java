@@ -19,77 +19,21 @@ public class ReporterService {
     private ReporterRepository reporterRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    // Method to get all reporters
-    public List<Reporter> getAllReporters() {
-        return reporterRepository.findAll();  // Fetch all reporters from the database
-    }
+    public Reporter registerReporter(Reporter reporter) {
+        // Step 1: Create and save the Reporter entity
+        Reporter MyReporter = new Reporter();
+        reporter.setName(reporter.getName());
+        reporter.setEmail(reporter.getEmail());
 
-    // Create a new Reporter with an associated User
-    @Transactional
-    public Reporter createReporter(Reporter reporter) {
-        // Ensure the role is set to "reporter" if not already set
-        User user = reporter.getUser();
-        if (user != null && (user.getRole() == null || user.getRole().isEmpty())) {
-            user.setRole("reporter");
-        }
+        // Step 2: Create the corresponding User entity and associate with Reporter
+        User user = userService.createUser(reporter.getEmail(), reporter.getPassword(), "reporter");
+        reporter.setUser(user);
 
-        // Save the User first to ensure it gets a user_id
-        userRepository.save(user);
+        // Step 3: Save the Reporter entity along with the User entity
+        reporterRepository.save(reporter);
 
-        // Save the Reporter
-        return reporterRepository.save(reporter);
-    }
-
-    // Get a Reporter by ID
-    public Optional<Reporter> getReporterById(Long id) {
-        return reporterRepository.findById(id);
-    }
-
-    // Update an existing Reporter
-    @Transactional
-    public Reporter updateReporter(Long id, Reporter updatedReporter) {
-        // Retrieve the existing Reporter
-        Optional<Reporter> optionalReporter = reporterRepository.findById(id);
-        if (optionalReporter.isPresent()) {
-            Reporter existingReporter = optionalReporter.get();
-
-            // Update the fields
-            existingReporter.setName(updatedReporter.getName());
-            existingReporter.setCreatedAt(updatedReporter.getCreatedAt());
-
-            // Update User if necessary
-            User existingUser = existingReporter.getUser();
-            User updatedUser = updatedReporter.getUser();
-            if (updatedUser != null) {
-                existingUser.setEmail(updatedUser.getEmail());
-                existingUser.setPassword(updatedUser.getPassword());
-                existingUser.setRole(updatedUser.getRole());
-            }
-
-            // Save the updated Reporter
-            return reporterRepository.save(existingReporter);
-        }
-        return null;
-    }
-
-    // Delete a Reporter by ID
-    @Transactional
-    public void deleteReporter(Long id) {
-        // Retrieve the Reporter by ID
-        Optional<Reporter> optionalReporter = reporterRepository.findById(id);
-        if (optionalReporter.isPresent()) {
-            Reporter reporter = optionalReporter.get();
-            // Remove the associated User as well
-            userRepository.delete(reporter.getUser());
-            // Remove the Reporter
-            reporterRepository.delete(reporter);
-        }
-    }
-
-    // Find a Reporter by User ID
-    public Optional<Reporter> findByUserId(Long userId) {
-        return reporterRepository.findByUserId(userId);
+        return reporter;
     }
 }

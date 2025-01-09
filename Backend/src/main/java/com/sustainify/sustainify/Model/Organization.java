@@ -25,7 +25,7 @@ public class Organization {
 
     @Column(nullable = false, unique = true)
     @Email(message = "Invalid email format")
-    private String email;
+    private String email; // Email field added for organization
 
     @Column(nullable = false)
     @Past(message = "Established date must be in the past")
@@ -56,7 +56,7 @@ public class Organization {
 
     @Column(nullable = false)
     @Email(message = "Invalid contact person's email")
-    private String contactPersonEmail;
+    private String contactPersonEmail; // Contact person's email
 
     // Alternate contact person details
     @Column

@@ -31,7 +31,7 @@ public class OrganizationService {
         organization.setContactPersonEmail(organization.getContactPersonEmail());
 
         // Step 2: Create the corresponding User entity and associate with Organization
-        User user = userService.createUser(organization.getContactPersonEmail(), organizationDTO.getPassword(), "organization");
+        User user = userService.createUser(organization.getContactPersonEmail(), organization.getPassword(), "organization");
         organization.setUser(user);
 
         // Step 3: Save the Organization entity along with the User entity
@@ -39,7 +39,7 @@ public class OrganizationService {
         
         return organization;
     }
-}
+
 
     public Organization getOrganizationById(Long id) {
         return organizationRepository.findById(id).orElse(null); // Return null if not found
