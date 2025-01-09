@@ -78,4 +78,17 @@ public class Organization {
     @NotEmpty(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
+
+    // One-to-One mapping with User
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user; // Link to the User entity
+
+    // Automatically set the role to 'organization' before persisting the entity
+    @PrePersist
+    protected void onCreate() {
+        if (user != null && (user.getRole() == null || user.getRole().isEmpty())) {
+            user.setRole("organization");
+        }
+    }
 }

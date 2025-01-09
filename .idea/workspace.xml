@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b6c57d9-38cc-4e0c-8501-793d639b32fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/SustainifyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/SustainifyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/Service/ReporterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/Service/ReporterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/controller/ReporterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/controller/ReporterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/reporter table-structure updated.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/reporter table-structure updated.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/sustainify/sustainify/config/WebConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

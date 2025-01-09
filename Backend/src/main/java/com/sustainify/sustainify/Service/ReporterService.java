@@ -1,12 +1,16 @@
 package com.sustainify.sustainify.Service;
 
 import com.sustainify.sustainify.Model.Reporter;
+import com.sustainify.sustainify.Model.User;
 import com.sustainify.sustainify.Repository.ReporterRepository;
+import com.sustainify.sustainify.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.List;
+
 
 @Service
 public class ReporterService {
@@ -15,35 +19,77 @@ public class ReporterService {
     private ReporterRepository reporterRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;  // Autowire PasswordEncoder
+    private UserRepository userRepository;
 
-    public boolean authenticateReporter(String email, String password) {
-        // Find the reporter by email
-        Reporter reporter = reporterRepository.existsByEmail(email);
-        
-        if (reporter == null) {
-            return false;  // Reporter not found
-        }
-        
-        // Check if the password matches
-        return passwordEncoder.matches(password, reporter.getPassword());
+    // Method to get all reporters
+    public List<Reporter> getAllReporters() {
+        return reporterRepository.findAll();  // Fetch all reporters from the database
     }
 
-    public Reporter registerReporter(Reporter reporter) {
-        // Check if required fields are not null
-        if (reporter.getName() == null || reporter.getEmail() == null || reporter.getPassword() == null) {
-            throw new IllegalArgumentException("Name, email, and password must not be null.");
+    // Create a new Reporter with an associated User
+    @Transactional
+    public Reporter createReporter(Reporter reporter) {
+        // Ensure the role is set to "reporter" if not already set
+        User user = reporter.getUser();
+        if (user != null && (user.getRole() == null || user.getRole().isEmpty())) {
+            user.setRole("reporter");
         }
-        
-        // Hash password before saving
-        reporter.setPassword(passwordEncoder.encode(reporter.getPassword()));
-        
-        // Save and return the reporter entity
+
+        // Save the User first to ensure it gets a user_id
+        userRepository.save(user);
+
+        // Save the Reporter
         return reporterRepository.save(reporter);
     }
 
-    // Fetch all reporters
-    public List<Reporter> getAllReporters() {
-        return reporterRepository.findAll();
+    // Get a Reporter by ID
+    public Optional<Reporter> getReporterById(Long id) {
+        return reporterRepository.findById(id);
+    }
+
+    // Update an existing Reporter
+    @Transactional
+    public Reporter updateReporter(Long id, Reporter updatedReporter) {
+        // Retrieve the existing Reporter
+        Optional<Reporter> optionalReporter = reporterRepository.findById(id);
+        if (optionalReporter.isPresent()) {
+            Reporter existingReporter = optionalReporter.get();
+
+            // Update the fields
+            existingReporter.setName(updatedReporter.getName());
+            existingReporter.setCreatedAt(updatedReporter.getCreatedAt());
+
+            // Update User if necessary
+            User existingUser = existingReporter.getUser();
+            User updatedUser = updatedReporter.getUser();
+            if (updatedUser != null) {
+                existingUser.setEmail(updatedUser.getEmail());
+                existingUser.setPassword(updatedUser.getPassword());
+                existingUser.setRole(updatedUser.getRole());
+            }
+
+            // Save the updated Reporter
+            return reporterRepository.save(existingReporter);
+        }
+        return null;
+    }
+
+    // Delete a Reporter by ID
+    @Transactional
+    public void deleteReporter(Long id) {
+        // Retrieve the Reporter by ID
+        Optional<Reporter> optionalReporter = reporterRepository.findById(id);
+        if (optionalReporter.isPresent()) {
+            Reporter reporter = optionalReporter.get();
+            // Remove the associated User as well
+            userRepository.delete(reporter.getUser());
+            // Remove the Reporter
+            reporterRepository.delete(reporter);
+        }
+    }
+
+    // Find a Reporter by User ID
+    public Optional<Reporter> findByUserId(Long userId) {
+        return reporterRepository.findByUserId(userId);
     }
 }

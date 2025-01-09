@@ -1,29 +1,56 @@
 package com.sustainify.sustainify.Util;
 
-import java.security.Key;
-import java.time.Instant;
-import java.util.Date;
-
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.function.Function;
+
+@Component
 public class JwtUtil {
-    private final String secretKey = "mysecretkey123@456"; // Use a strong secret key
 
-    // Generate a Key object from the secret key
-    private Key getSigningKey() {
-        byte[] keyBytes = secretKey.getBytes();
-        return Keys.hmacShaKeyFor(keyBytes);
+    @Value("${jwt.secret}")
+    private String secret;
+
+    @Value("${jwt.expiration}")
+    private Long expiration;
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
-    // Generate JWT token
-    public String generateToken(String username) {
-        Instant now = Instant.now();
-        return Jwts.builder()
-                .claim("sub", username) // Use 'claim' instead of 'setSubject'
-                .claim("iat", Date.from(now)) // Issue At
-                .claim("exp", Date.from(now.plusSeconds(3600))) // Expiration Time (1 hour)
-                .signWith(getSigningKey()) // Use the Key instance
-                .compact();
+    public Boolean validateToken(String token, String username) {
+        final String tokenUsername = getUsernameFromToken(token);
+        return (tokenUsername.equals(username) && !isTokenExpired(token));
+    }
+
+    public String getUsernameFromToken(String token) {
+        return getClaimFromToken(token, Claims::getSubject);
+    }
+
+    public Date getExpirationDateFromToken(String token) {
+        return getClaimFromToken(token, Claims::getExpiration);
+    }
+
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+    }
+
+    private Boolean isTokenExpired(String token) {
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.before(new Date());
     }
 }

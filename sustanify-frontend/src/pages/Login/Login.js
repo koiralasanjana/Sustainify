@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';  // Import axios
 import { useNavigate } from 'react-router-dom';  // Import useNavigate hook for navigation
 import '../../components/Modal/Modal.css';
+import AuthService from '../../services/AuthService';
 
 const Login = ({ show, onClose }) => {
     const navigate = useNavigate();  // Hook for navigation after successful login
@@ -26,15 +27,16 @@ const Login = ({ show, onClose }) => {
 
         setErrorMessage(""); // Clear previous error messages
 
-        const data = { email, password };
+        const credentials  = { email, password };
 
         try {
             // Sending POST request to the backend for login
-            const response = await axios.post('http://localhost:8081/api/login', data);
+            const response = await AuthService.login(credentials);
 
+        
             if (response.status === 200) {
                 // On successful login, store JWT token in localStorage
-                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('token', response.token);
 
                 // Navigate to the dashboard or home page
                 navigate('/');
